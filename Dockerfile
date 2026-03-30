@@ -38,8 +38,10 @@ COPY . .
 # Ensure permissions for storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache || true
 
-# Expose php-fpm
-EXPOSE 9000
+# Expose the HTTP port (Railway will route to this)
+ENV PORT=8080
+EXPOSE ${PORT}
 
-# Default command
-CMD ["php-fpm"]
+# Default command: use PHP built-in server to serve the Laravel `public` directory.
+# This is acceptable for simple container deploys (for production, use php-fpm + nginx/caddy).
+CMD ["sh", "-lc", "php -S 0.0.0.0:${PORT} -t public"]
