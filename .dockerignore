@@ -1,0 +1,15 @@
+# Ignore node modules, vendor and local files
+node_modules
+vendor
+.env
+.env.*
+.git
+.gitignore
+Dockerfile
+docker-compose.*
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+npm-debug.log
+yarn-error.log
