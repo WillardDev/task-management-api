@@ -44,4 +44,4 @@ EXPOSE ${PORT}
 
 # Default command: use PHP built-in server to serve the Laravel `public` directory.
 # This is acceptable for simple container deploys (for production, use php-fpm + nginx/caddy).
-CMD ["sh", "-lc", "php -S 0.0.0.0:${PORT} -t public"]
+CMD ["sh", "-lc", "php -S 0.0.0.0:${PORT} -t public router.php"]
