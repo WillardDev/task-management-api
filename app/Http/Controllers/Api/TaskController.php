@@ -24,7 +24,7 @@ class TaskController extends Controller
             'status' => 'pending',
         ]);
 
-        return response()->json(new TaskResource($task), 201);
+        return (new TaskResource($task))->response()->setStatusCode(201);
     }
 
     /**
@@ -45,9 +45,11 @@ class TaskController extends Controller
             ->orderBy('due_date', 'asc')
             ->get();
 
+        // Always return a consistent response shape with a data array (empty when no tasks)
         if ($tasks->isEmpty()) {
             return response()->json([
                 'message' => 'No tasks found',
+                'data' => [],
             ], 200);
         }
 

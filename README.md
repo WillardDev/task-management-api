@@ -12,10 +12,10 @@ A Laravel-based REST API for managing tasks with priority levels and status trac
 
 ## Requirements
 
-- PHP 8.1+
+- PHP 8.4+
 - Composer
 - MySQL 5.7+
-- Laravel 11.x
+- Laravel 13.x (composer.json requires ^13.0)
 
 ## Local Setup
 
@@ -120,7 +120,19 @@ A sleek, user-friendly form for adding new tasks.
 
 ### 5. Deploy
 - Railway will automatically deploy on push to main branch
-- Run migrations: Add build command `php artisan migrate --force`
+
+Recommended: Run migrations during deployment using a release command or a one-off job. Example release/build step:
+
+```
+php artisan migrate --force
+```
+
+Make sure the following environment variables are set in Railway (or your host) before running migrations:
+
+- APP_KEY (generate with `php artisan key:generate` locally and set the value in Railway)
+- DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+
+If you temporarily added a `/migrate` HTTP route during debugging, remove it before final submission — running migrations via an endpoint is a security risk. Prefer a release step or a protected one-off job.
 
 ### 6. Access Your API
 - Railway will provide a public URL
