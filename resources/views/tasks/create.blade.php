@@ -17,7 +17,7 @@
                 <div class="grid grid-cols-2 gap-6">
                     <div>
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Due Date</label>
-                        <input type="date" id="due_date" name="due_date" required
+                        <input type="date" id="due_date" name="due_date" required min="{{ date('Y-m-d') }}"
                             class="w-full bg-gray-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-blue-500/20 font-medium text-slate-700">
                     </div>
                     <div>
@@ -45,6 +45,29 @@
 
     @push('scripts')
         <script>
+            // Enforce min date on the due_date input and prevent selecting past dates
+            const dueInput = document.getElementById('due_date');
+            const todayStr = new Date().toISOString().slice(0, 10);
+            if (dueInput) {
+                dueInput.setAttribute('min', todayStr);
+                dueInput.addEventListener('input', () => {
+                    const submitBtnLocal = document.getElementById('submitBtn');
+                    if (dueInput.value && dueInput.value < todayStr) {
+                        dueInput.classList.add('text-gray-400');
+                        if (submitBtnLocal) {
+                            submitBtnLocal.disabled = true;
+                            submitBtnLocal.classList.add('opacity-60', 'cursor-not-allowed');
+                        }
+                    } else {
+                        dueInput.classList.remove('text-gray-400');
+                        if (submitBtnLocal) {
+                            submitBtnLocal.disabled = false;
+                            submitBtnLocal.classList.remove('opacity-60', 'cursor-not-allowed');
+                        }
+                    }
+                });
+            }
+
             document.getElementById('taskForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
 
@@ -109,7 +132,8 @@
                         try {
                             text = await response.text();
                         } catch (err) {
-                            /* ignore */ }
+                            /* ignore */
+                        }
                         statusEl.classList.remove('text-green-600');
                         statusEl.classList.add('text-red-600');
                         statusEl.textContent = text;

@@ -23,11 +23,11 @@ Route::get('/health', function () {
  * Example: /seed-tasks?secret=your_secret_here
  * NOTE: For security, set SEED_SECRET in production and keep it secret.
  */
-Route::get('/seed-tasks', function (Request $request) {
-    Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\TaskSeeder', '--force' => true]);
+// Route::get('/seed-tasks', function (Request $request) {
+//     Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\TaskSeeder', '--force' => true]);
 
-    return response('Task seeder executed', 200);
-});
+//     return response('Task seeder executed', 200);
+// });
 
 /**
  * Temporary migration endpoint (UNPROTECTED)
