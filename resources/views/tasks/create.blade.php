@@ -45,7 +45,6 @@
 
     @push('scripts')
         <script>
-            // Enforce min date on the due_date input and prevent selecting past dates
             const dueInput = document.getElementById('due_date');
             const todayStr = new Date().toISOString().slice(0, 10);
             if (dueInput) {
@@ -127,7 +126,6 @@
                         statusEl.classList.add('text-red-600');
                         statusEl.textContent = data.message;
                     } else {
-                        // fallback: try to read text body
                         let text = 'Failed to create task';
                         try {
                             text = await response.text();

@@ -17,9 +17,7 @@
         <div class="text-blue-600 text-2xl"><i class="fas fa-th-large"></i></div>
         <nav class="flex flex-col space-y-8">
             <a href="{{ route('tasks.index') }}" class="sidebar-icon text-blue-600"><i class="fas fa-home"></i></a>
-            {{-- <a href="#" class="sidebar-icon"><i class="fas fa-envelope"></i></a>
-            <a href="#" class="sidebar-icon"><i class="fas fa-calendar-alt"></i></a>
-            <a href="#" class="sidebar-icon"><i class="fas fa-chart-bar"></i></a> --}}
+            <a href="{{ route('tasks.report') }}" class="sidebar-icon text-blue-600"><i class="fas fa-calendar-alt"></i></a>
         </nav>
     </aside>
 
@@ -28,7 +26,6 @@
             <div class="text-sm text-gray-400 font-medium">Tasks &gt; <span class="text-gray-900">Today</span></div>
             <div class="flex items-center space-x-6">
                 <a href="#" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600 pb-1">Board</a>
-                {{-- <a href="#" class="text-sm font-semibold text-gray-400">Activity</a> --}}
                 <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 shadow-sm"></div>
             </div>
         </header>
