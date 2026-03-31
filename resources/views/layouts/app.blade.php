@@ -25,8 +25,6 @@
         <header class="h-16 bg-white border-b border-gray-50 flex items-center justify-between px-10">
             <div class="text-sm text-gray-400 font-medium">Tasks &gt; <span class="text-gray-900">Today</span></div>
             <div class="flex items-center space-x-6">
-                <a href="#" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600 pb-1">Board</a>
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 shadow-sm"></div>
             </div>
         </header>
 
