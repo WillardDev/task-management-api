@@ -3,27 +3,26 @@
 namespace Database\Seeders;
 
 use App\Models\Task;
-use Faker\Factory;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class TaskSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Factory::create();
-
         $priorities = ['low', 'medium', 'high'];
         $statuses = ['pending', 'in_progress', 'done'];
 
-        // Create 50 tasks with varied priorities and statuses
+        $subjects = ['project', 'proposal', 'pull request', 'documentation', 'bugfix', 'feature', 'test', 'deployment', 'design', 'research'];
+        $verbs = ['Complete', 'Review', 'Update', 'Fix', 'Write', 'Prepare', 'Test', 'Deploy', 'Design', 'Research'];
+
+        // Create 50 tasks with deterministic unique titles (avoid Faker so seeder works in prod without dev deps)
         for ($i = 0; $i < 50; $i++) {
-            $title = ucfirst($faker->words(3, true)).' #'.($i + 1);
-            $dueDate = $faker->dateTimeBetween('now', '+30 days')->format('Y-m-d');
+            $title = $verbs[$i % count($verbs)] . ' ' . $subjects[$i % count($subjects)] . ' #' . ($i + 1);
+            $dueDate = Carbon::now()->addDays(rand(0, 30))->format('Y-m-d');
 
-            // Weighted distribution: more pending, fewer done
-            $status = $faker->randomElement($statuses);
-
-            $priority = $faker->randomElement($priorities);
+            $status = $statuses[array_rand($statuses)];
+            $priority = $priorities[array_rand($priorities)];
 
             Task::create([
                 'title' => $title,
